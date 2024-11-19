@@ -1,0 +1,32 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+V = 8.74
+R = 100000
+KapList = [1.5e-6, 10e-6, 33e-6, 100e-6]
+
+tid1 = np.linspace(0, 10, 500)
+tid2 = np.arange(0, 14)
+EnFemKond = [0, 8.43, 8.61, 8.54, 8.59, 8.61, 8.61, 8.62, 8.62, 8.62, 8.62, 8.62, 8.62, 8.62]
+EnNullKond = [0, 3.9, 5.9, 7.8, 8.1, 8.42, 8.52, 8.56, 8.59, 8.59, 8.59, 8.6, 8.6, 8.61]
+TreTreKond = [0, 1.8, 3.1, 4.7, 5.6, 6.4, 6.8, 7.1, 7.5, 7.7, 7.9, 8.0, 8.1, 8.2]
+HundreKond = [0, 0.9, 1.4, 1.8, 2.4, 2.9, 3.5, 3.9, 4.2, 4.8, 5.1, 5.4, 5.7, 5.9]
+Fullist = [EnFemKond, EnNullKond, TreTreKond, HundreKond]
+KondNavn = ['1.5 μF', '10 μF', '33 μF', '100 μF']
+
+fig, ax = plt.subplots(figsize = (10, 6))
+
+for iterasjon, kond in enumerate(Fullist):
+    ax.plot(tid2, kond, 'o', label = f'Måling. C = {KondNavn[iterasjon]}')
+
+for c in KapList:
+    Vc = V*(1 - np.exp(-tid1/(R*c)))
+    ax.plot(tid1, Vc, label = f'Teoretisk. C = {c*1e6: .1f} μF')
+
+ax.set_title("Sammenligning: Teoretisk og resultat")
+ax.set_ylabel("Vc (V)")
+ax.set_xlabel("Tid (s)")
+ax.grid(True, color = 'black')
+ax.legend()
+plt.tight_layout()
+plt.show()

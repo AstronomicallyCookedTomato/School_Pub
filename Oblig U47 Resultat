@@ -1,0 +1,24 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+tid = np.arange(0, 14)
+EnFemKond = [0, 8.43, 8.61, 8.54, 8.59, 8.61, 8.61, 8.62, 8.62, 8.62, 8.62, 8.62, 8.62, 8.62]
+EnNullKond = [0, 3.9, 5.9, 7.8, 8.1, 8.42, 8.52, 8.56, 8.59, 8.59, 8.59, 8.6, 8.6, 8.61]
+TreTreKond = [0, 1.8, 3.1, 4.7, 5.6, 6.4, 6.8, 7.1, 7.5, 7.7, 7.9, 8.0, 8.1, 8.2]
+HundreKond = [0, 0.9, 1.4, 1.8, 2.4, 2.9, 3.5, 3.9, 4.2, 4.8, 5.1, 5.4, 5.7, 5.9]
+Fullist = [EnFemKond, EnNullKond, TreTreKond, HundreKond]
+KondNavn = ['1.5 μF', '10 μF', '33 μF', '100 μF']
+
+fig, ax = plt.subplots(figsize = (10, 6))
+
+for iterasjon, kond in enumerate(Fullist):
+    ax.plot(tid, kond, 'o', label = f'C = {KondNavn[iterasjon]}')
+
+ax.set_title("Resultater; måling av spenningsfall i RC-krets")
+ax.set_ylabel("Vc (V)")
+ax.set_xlabel("Tid (s)")
+ax.grid(True, color = 'black')
+ax.legend()
+
+plt.tight_layout()
+plt.show()

@@ -1,0 +1,21 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+V = 9
+R = 100000
+KapList = [1.5e-6, 10e-6, 33e-6, 100e-6]
+
+tid = np.linspace(0, 10, 500)
+fig, ax = plt.subplots(figsize = (10, 6))
+
+for c in KapList:
+    Vc = V*(1 - np.exp(-tid/(R*c)))
+    ax.plot(tid, Vc, label = f'C = {c*1e6: .1f} μF')
+
+ax.set_title("Teoretisk spenningskurve for kondensatorer")
+ax.set_ylabel("Vc (V)")
+ax.set_xlabel("Tid (s)")
+ax.grid(True, color = 'black')
+ax.legend()
+plt.tight_layout()
+plt.show()
